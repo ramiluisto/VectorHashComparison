@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import json
-
+import os
 
 
 
@@ -69,7 +69,48 @@ def create_a_picture_from_data(filename):
     plt.show()
 
 
-create_a_picture_from_data('hash_speedtest_dim-2000_intmax-100_vectorlistlen-2.json')
-create_a_picture_from_data('hash_speedtest_dim-2000_intmax-100_vectorlistlen-10.json')
-create_a_picture_from_data('hash_speedtest_dim-2000_intmax-100_vectorlistlen-20.json')
-create_a_picture_from_data('hash_speedtest_dim-2000_intmax-100_vectorlistlen-200.json')
+def main():
+    json_filenames =  [filename for filename in os.listdir('./data/') if filename[-4:]=='json']
+    a, b, c, d = json_filenames
+    json_filenames = [d,a,c,b]
+
+    for filename in json_filenames:
+        create_a_picture_from_data(filename)
+
+
+
+    simple_int_results = {}
+    x_lengths = set()
+    for filename in json_filenames:
+        with open('./data/'+filename, 'r') as infile:
+            data = dict(json.load(infile))
+        results = data['simple_int']
+        simple_int_results[filename] = data['simple_int']
+
+
+        fileroot = filename.split('.')[0]
+        int_number = fileroot.split('-')[-1]
+        
+        x = np.array(range(2, len(results)+2))
+        y = np.array(results)
+        plt.plot(x, y, label = 'max_int = {}'.format(int_number))
+        plt.legend(loc = 'upper left')
+        plt.title('How the integer range affects the timing.')
+        plt.xlabel("Vector dimension")
+        plt.ylabel("Set filling time in ms.")
+
+    plt.savefig('./img/ComparisonImg.png')
+    plt.show()
+        
+        
+if __name__ == '__main__':
+    main()
+        
+        
+
+
+    
+
+
+
+
