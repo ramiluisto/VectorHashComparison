@@ -1,6 +1,6 @@
 # Vector hash comparison inspired by Ramalho's *Fluent Python*
 
-In the past few months I've been reading through Luciano Ramalho's excellent Fluent Python. 
+At the time of the original writing of this code I had been reading through Luciano Ramalho's excellent Fluent Python. 
 In chapter nine, A Pythonic Object, we build a pythonic implementation of a 2-dimensional vector object,
 and in the next chapter extend it to an n-dimensional vector. At one point in the chapter we want to make the 
 object hashable by implementing the __eq__ and __hash__ methods. The first iteration implements the hash of a 
@@ -97,6 +97,6 @@ So, summa summarum, the set filling times seem to increase linearly with dimensi
 but the slope can vary by orders of magnitude depending on the situation.
 
 
-* I wont.
+\* I wont.
 
 ** I might.
